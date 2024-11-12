@@ -5,6 +5,7 @@ import requests,json,os
 if __name__ == '__main__':
 # pushplus秘钥 申请地址 http://www.pushplus.plus
     sckey = os.environ.get("PUSHPLUS_TOKEN", "")
+    print('sckey:', sckey)
 # 推送内容
     sendContent = ''
 # glados账号cookie 直接使用数组 如果使用环境变量需要字符串分割一下
@@ -21,12 +22,18 @@ if __name__ == '__main__':
     payload={
         'token': 'glados.one'
     }
+    
     for cookie in cookies:
         checkin = requests.post(url,headers={'cookie': cookie ,'referer': referer,'origin':origin,'user-agent':useragent,'content-type':'application/json;charset=UTF-8'},data=json.dumps(payload))
+        print(checkin)
+        print(type(checkin))
         state =  requests.get(url2,headers={'cookie': cookie ,'referer': referer,'origin':origin,'user-agent':useragent})
+        print(state)
+        print(type(state))
     #--------------------------------------------------------------------------------------------------------#  
         time = state.json()['data']['leftDays']
-    #    time = time.split('.')[0]
+        print('time1:', time)
+        time = time.split('.')[0]
         email = state.json()['data']['email']
         if 'message' in checkin.text:
             mess = checkin.json()['message']
