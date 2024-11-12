@@ -10,6 +10,7 @@ if __name__ == '__main__':
     sendContent = ''
 # glados账号cookie 直接使用数组 如果使用环境变量需要字符串分割一下
     cookies = os.environ.get("GLADOS_COOKIE", []).split("&")
+    print('cookies:', cookies)
     if cookies[0] == "":
         print('未获取到COOKIE变量') 
         cookies = []
@@ -25,11 +26,11 @@ if __name__ == '__main__':
     
     for cookie in cookies:
         checkin = requests.post(url,headers={'cookie': cookie ,'referer': referer,'origin':origin,'user-agent':useragent,'content-type':'application/json;charset=UTF-8'},data=json.dumps(payload))
-        print(checkin)
-        print(type(checkin))
+        print(checkin.json()['data'])
+        print(type(checkin.json()['data']))
         state =  requests.get(url2,headers={'cookie': cookie ,'referer': referer,'origin':origin,'user-agent':useragent})
-        print(state)
-        print(type(state))
+        print(state.json()['data'])
+        print(type(state.json()['data']))
     #--------------------------------------------------------------------------------------------------------#  
         time = state.json()['data']['leftDays']
         print('time1:', time)
