@@ -34,7 +34,11 @@ if __name__ == '__main__':
     #--------------------------------------------------------------------------------------------------------#  
         time = state.json()['data']['leftDays']
         print('time1:', time)
-        time = time.split('.')[0]
+        if isinstance(time, int):
+            time = str(time)
+        else:
+            time = time.split('.')[0]
+        # time = time.split('.')[0]
         email = state.json()['data']['email']
         if 'message' in checkin.text:
             mess = checkin.json()['message']
