@@ -26,11 +26,11 @@ if __name__ == '__main__':
     
     for cookie in cookies:
         checkin = requests.post(url,headers={'cookie': cookie ,'referer': referer,'origin':origin,'user-agent':useragent,'content-type':'application/json;charset=UTF-8'},data=json.dumps(payload))
-        print(checkin.json()['data'])
-        print(type(checkin.json()['data']))
+        print(checkin.json())
+        print(type(checkin.json()))
         state =  requests.get(url2,headers={'cookie': cookie ,'referer': referer,'origin':origin,'user-agent':useragent})
-        print(state.json()['data'])
-        print(type(state.json()['data']))
+        print(state.json())
+        print(type(state.json()))
     #--------------------------------------------------------------------------------------------------------#  
         time = state.json()['data']['leftDays']
         print('time1:', time)
